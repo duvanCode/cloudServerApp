@@ -1,4 +1,3 @@
-
 import 'package:cloudserver/features/auth/domain/usecases/login_usecase.dart';
 import 'package:cloudserver/features/auth/presentation/bloc/auth_event.dart';
 import 'package:cloudserver/features/auth/presentation/bloc/auth_state.dart';
@@ -16,11 +15,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(AuthLoading());
-    
     final result = await loginUseCase(
       LoginParams(email: event.email, password: event.password),
     );
-    
+
     result.fold(
       (failure) => emit(AuthError(message: 'Error de login')),
       (user) => emit(AuthSuccess(user: user)),

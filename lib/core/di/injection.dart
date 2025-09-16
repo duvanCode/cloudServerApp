@@ -2,6 +2,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Importar todas las dependencias de Auth
 import '../../features/auth/data/datasources/auth_remote_datasource.dart';
@@ -24,9 +25,13 @@ Future<void> initializeDependencies() async {
 // ===== CONFIGURACIÓN DE SERVICIOS EXTERNOS =====
 Future<void> _initExternalServices() async {
   // Dio para HTTP requests
+
+  String apiUrl = dotenv.env['API_URL']!;
+
   getIt.registerLazySingleton<Dio>(() {
     final dio = Dio();
-    dio.options.baseUrl = 'https://tu-api.com/api/'; // Cambia por tu URL
+    dio.options.method = 'POST';
+    dio.options.baseUrl =  apiUrl;
     dio.options.connectTimeout = Duration(seconds: 5);
     dio.options.receiveTimeout = Duration(seconds: 3);
     
@@ -40,31 +45,26 @@ Future<void> _initExternalServices() async {
     return dio;
   });
   
-  // SharedPreferences para storage local
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 }
 
-// ===== CONFIGURACIÓN DE AUTH FEATURE =====
 void _initAuth() {
-  // 📡 DATA SOURCES
+
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(dio: getIt<Dio>()),
   );
   
-  // 🏪 REPOSITORY
   getIt.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
       remoteDataSource: getIt<AuthRemoteDataSource>(),
     ),
   );
   
-  // 🎯 USE CASES
   getIt.registerLazySingleton<LoginUseCase>(
     () => LoginUseCase(getIt<AuthRepository>()),
   );
   
-  // 🎨 BLOC
   getIt.registerFactory<AuthBloc>(
     () => AuthBloc(
       loginUseCase: getIt<LoginUseCase>(),

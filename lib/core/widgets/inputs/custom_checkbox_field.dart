@@ -2,29 +2,37 @@ import 'package:cloudserver/shared/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomCheckboxField extends StatefulWidget {
-  CustomCheckboxField({Key? key});
+  final ValueNotifier<bool>? isChecked;
+  CustomCheckboxField({Key? key, this.isChecked});
 
   @override
   _StateCustomCheckboxField createState() => _StateCustomCheckboxField();
 }
 
 class _StateCustomCheckboxField extends State<CustomCheckboxField> {
-  bool _value = false;
+  bool get isChecked => widget.isChecked?.value ?? false;
+
+  set isChecked(bool value) {
+    setState(() {
+      isChecked = value;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Checkbox(
-      value: _value,
+      value: isChecked,
       onChanged: (bool? value) {
+        if (widget.isChecked != null && value != null) {
+          widget.isChecked!.value = value;
+        }
         setState(() {});
-        _value = value ?? false;
       },
       visualDensity: VisualDensity.compact,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       fillColor: WidgetStateProperty.resolveWith((states) {
-        return _value
-            ? AppColors.buttonBlue
-            : AppColors.white;
+        return this.isChecked ? AppColors.buttonBlue : AppColors.white;
       }),
     );
   }

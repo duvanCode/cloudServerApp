@@ -11,6 +11,7 @@ class LoginForm extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final VoidCallback onSubmit;
+  final ValueNotifier<bool> isChecked;
 
   const LoginForm({
     Key? key,
@@ -18,10 +19,12 @@ class LoginForm extends StatelessWidget {
     required this.emailController,
     required this.passwordController,
     required this.onSubmit,
+    required this.isChecked,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Form(
       key: formKey,
       child: Column(
@@ -45,7 +48,9 @@ class LoginForm extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  CustomCheckboxField(),
+                  CustomCheckboxField(
+                    isChecked: isChecked,
+                  ),
                   Text('Remember me', style: TextStyle(color: AppColors.white)),
                 ],
               ),
@@ -60,7 +65,7 @@ class LoginForm extends StatelessWidget {
             width: double.infinity,
             child: CustomSubmitField(
               child: Text('Submit', style: TextStyle(color: AppColors.white)),
-              onPressed: () {},
+              onPressed: onSubmit,
             ),
           ),
         ],
