@@ -1,10 +1,18 @@
-import 'package:cloudserver/features/auth/domain/entities/Response.dart';
+import 'package:cloudserver/core/domain/entities/response.dart';
 
 class ResponseModel extends Response {
-  ResponseModel({
-    required bool success,
-    required String message,
-    required dynamic data,
+
+  @override
+  final bool success;
+  @override
+  final String message;
+  @override
+  final dynamic data;
+
+  const ResponseModel({
+    required this.success,
+    required this.message,
+    required this.data,
   }) : super(success: success, message: message, data: data);
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) {

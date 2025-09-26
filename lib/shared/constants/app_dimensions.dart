@@ -9,4 +9,9 @@ class AppDimensions {
   
   static const double iconSizeLarge = 60.0;
   static const double fontSizeLarge = 35.0;
+
+  static const double fontSizeMedium = 20.0;
+  static const double fontSizeSmall = 16.0;
+
+  static const double iconSizeSmall = 35.0;
 }

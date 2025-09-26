@@ -19,9 +19,9 @@ class Validators {
     return null;
   }
 
-  static String? required(String? value, String fieldName) {
+  static String? required(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter $fieldName';
+      return 'Please enter a value';
     }
     return null;
   }

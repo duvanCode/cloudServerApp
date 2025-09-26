@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
           return Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(AppDimensions.paddingMedium),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,

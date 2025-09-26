@@ -34,6 +34,7 @@ class LoginForm extends StatelessWidget {
             controller: emailController,
             validator: Validators.email,
             keyboardType: TextInputType.emailAddress,
+            contentPadding: EdgeInsets.all(AppDimensions.paddingMedium),
           ),
           SizedBox(height: AppDimensions.paddingSmall),
           CustomTextField(
@@ -41,6 +42,7 @@ class LoginForm extends StatelessWidget {
             controller: passwordController,
             validator: Validators.password,
             obscureText: true,
+            contentPadding: EdgeInsets.all(AppDimensions.paddingMedium),
           ),
           SizedBox(height: AppDimensions.paddingMedium),
           Row(

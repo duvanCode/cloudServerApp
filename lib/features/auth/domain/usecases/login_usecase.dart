@@ -1,5 +1,3 @@
-
-
 import 'package:cloudserver/core/errors/failures.dart';
 import 'package:cloudserver/core/usecases/usecase.dart';
 import 'package:cloudserver/features/auth/domain/entities/user.dart';
@@ -22,7 +20,7 @@ class LoginParams extends Equatable {
   final String email;
   final String password;
   
-  LoginParams({required this.email, required this.password});
+  const LoginParams({required this.email, required this.password});
   
   @override
   List<Object> get props => [email, password];

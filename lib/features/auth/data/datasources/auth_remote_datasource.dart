@@ -1,5 +1,5 @@
+import 'package:cloudserver/core/data/models/response_model.dart';
 import 'package:cloudserver/core/errors/failures.dart';
-import 'package:cloudserver/features/auth/data/models/response_model.dart';
 import 'package:cloudserver/features/auth/data/models/user_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -26,16 +26,19 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final ResponseModel responseData = ResponseModel.fromJson(response.data);
 
       if (!responseData.success) {
-        return Left(ServerFailure());
+        return Left(ServerFailure(message: responseData.message));
       }
       
       final user = UserModel.fromJson(responseData.data);
 
       return Right(user);
+
     } on DioException catch (e) {
-      return Left(ServerFailure());
+
+      return Left(ServerFailure(message: e.message ?? 'An error occurred'));
+    
     } catch (e) {
-      return Left(ServerFailure());
+      return Left(ServerFailure(message: e.toString()));
     }
   }
 }

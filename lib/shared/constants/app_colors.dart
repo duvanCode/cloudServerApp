@@ -9,4 +9,5 @@ class AppColors {
   static const Color white = Colors.white;
   static const Color blueGrey = Colors.blueGrey;
   static const Color red = Colors.red;
+  static const Color overlayColor = Colors.transparent;
 }
