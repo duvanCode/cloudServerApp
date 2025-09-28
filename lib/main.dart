@@ -3,10 +3,10 @@ import 'package:cloudserver/features/home/presentation/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/di/injection.dart';
-import './features/auth/presentation/bloc/auth_bloc.dart';
-import './features/auth/presentation/bloc/pages/login_page.dart';
+import 'package:cloudserver/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:cloudserver/features/auth/presentation/bloc/pages/login_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import './features/home/presentation/bloc/pages/home_page.dart';
+import 'package:cloudserver/features/home/presentation/bloc/pages/home_page.dart';
 
 void main() async {
   await dotenv.load();

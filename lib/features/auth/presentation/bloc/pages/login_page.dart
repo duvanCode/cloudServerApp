@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Navigator.pushReplacementNamed(context, '/home');
+            Navigator.pushReplacementNamed(context, '/home',arguments: state.user);
           }
         },
         builder: (context, state) {
